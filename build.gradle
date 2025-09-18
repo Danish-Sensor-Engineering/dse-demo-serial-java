@@ -9,15 +9,10 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
-    maven {
-        url = "http://onedev.home.arpa:6610/dse/libdse-java/~maven"
-        allowInsecureProtocol = true
-        credentials {
-            username = mavenUsername
-            password = mavenPassword
-        }
+    flatDir {
+        dirs 'lib'
     }
+    mavenCentral()
     mavenLocal()
 }
 
