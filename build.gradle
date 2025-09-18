@@ -3,9 +3,6 @@ plugins {
     id('groovy')
     id('application')
     id("com.gradleup.shadow") version "9.0.2"
-    id("com.google.osdetector") version "1.7.3"
-    id("com.netflix.nebula.ospackage") version "12.1.0"
-    id("org.javamodularity.moduleplugin") version "1.8.15"
 }
 
 repositories {
@@ -36,36 +33,12 @@ compileJava {
 dependencies {
     annotationProcessor 'info.picocli:picocli-codegen:4.7.6'
     implementation 'info.picocli:picocli:4.7.6'
+    implementation 'org.slf4j:slf4j-simple:2.0.16'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+
     implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
-    implementation 'dse.libs:libdse-java:1.0.15'
+    implementation 'dse.libs:libdse-java:1.0.16'
 }
-
-ospackage {
-    packageName = 'dse-cli-serial'
-    release = project.getVersion()
-    user = 'root'
-    packager = "Mark Nellemann <mark@sensor.dk>"
-
-    into '/opt/dse/cli-serial'
-
-    from(shadowJar.outputs.files) {
-        into 'lib'
-    }
-
-    from('build/scriptsShadow') {
-        into 'bin'
-    }
-
-    from('doc/') {
-        into 'doc'
-    }
-
-    from(['README.md', 'LICENSE']) {
-        into 'doc'
-    }
-
-}
-
 
 jar {
     manifest {
@@ -79,9 +52,4 @@ jar {
                 'Add-Opens'      : 'java.base/java.lang.invoke' // To ignore "Illegal reflective access by retrofit2.Platform" warnings
         )
     }
-}
-
-tasks.register("packages") {
-    group = "build"
-    dependsOn ":build"
 }

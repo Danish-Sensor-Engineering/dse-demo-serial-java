@@ -1,13 +1,14 @@
 package dse.cli.serial;
 
-public enum SerialType {
+public enum SensorType {
 
-    B16("16bit"),
-    B18("18bit");
+    ODS_B16("ODS-16bit"),
+    ODS_B18("ODS-18bit"),
+    O2DS("O2DS");
 
     private final String name;
 
-    SerialType(String stringVal) {
+    SensorType(String stringVal) {
         name=stringVal;
     }
 
@@ -16,7 +17,7 @@ public enum SerialType {
     }
 
     public static String getEnumByString(String code) {
-        for(SerialType e : SerialType.values()) {
+        for(SensorType e : SensorType.values()) {
             if(e.name.equals(code)) return e.name();
         }
         return null;

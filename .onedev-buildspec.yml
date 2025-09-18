@@ -1,0 +1,23 @@
+version: 40
+imports:
+  - projectPath: common/java/gradle-fatjar
+    revision: main
+jobs:
+  - name: Push to Github
+    steps:
+      - !PushRepository
+        name: Github
+        remoteUrl: https://github.com/Danish-Sensor-Engineering/dse-demo-serial-java
+        userName: mnellemann
+        passwordSecret: GITHUB-TOKEN
+        force: false
+        condition: SUCCESSFUL
+        optional: false
+    jobDependencies:
+      - jobName: Deploy
+        requireSuccessful: true
+        artifacts: '**'
+    retryCondition: never
+    maxRetries: 3
+    retryDelay: 30
+    timeout: 14400
