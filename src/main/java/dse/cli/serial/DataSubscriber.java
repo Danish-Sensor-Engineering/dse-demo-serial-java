@@ -11,7 +11,7 @@ public class DataSubscriber implements Flow.Subscriber<Measurement> {
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        System.out.println("onSubscribe");
+        System.out.println("Subscribed to measurement data ...");
         this.subscription = subscription;
         subscription.request(1);    // Ask for next result
     }
@@ -44,6 +44,12 @@ public class DataSubscriber implements Flow.Subscriber<Measurement> {
     @Override
     public void onComplete() {
         // Cleanup
+        System.out.println("All done.");
+    }
+
+
+    public void cancel() {
+        subscription.cancel();
     }
 
 }

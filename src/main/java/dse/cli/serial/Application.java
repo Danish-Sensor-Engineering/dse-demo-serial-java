@@ -73,6 +73,8 @@ public class Application implements Callable<Integer> {
         // Sleep some time to get some measurements
         Thread.sleep(5000);
 
+        // Unsubscribe to measurement data
+        dataSubscriber.cancel();
 
         return 0;
     }
