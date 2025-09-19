@@ -31,15 +31,19 @@ public class Application implements Callable<Integer> {
 
 
     @Override
-    public Integer call() {
+    public Integer call() throws InterruptedException {
+
+        // Setup the sensor based on the type
 
         SerialSensor serialSensor = null;
         switch (serialTelegramType) {
             case ODS_B16 -> {
+                // 16Bit telegram handler for 16Bit ODS
                 serialSensor = new SerialDistanceSensor();
                 serialSensor.setTelegramHandler(new TelegramHandler16Bit());
             }
             case ODS_B18 -> {
+                // 18Bit telegram handler for 18Bit ODS
                 serialSensor = new SerialDistanceSensor();
                 serialSensor.setTelegramHandler(new TelegramHandler18Bit());
             }
@@ -47,6 +51,7 @@ public class Application implements Callable<Integer> {
         }
 
 
+        // Try to open the serial port or print the available ports and exit
         if(serialSensor != null && !serialSensor.openPort(serialPort, serialBaudRate)) {
             System.err.println("Error opening serial port: " + serialPort);
             SerialSensor.printSerialPorts();
@@ -56,7 +61,17 @@ public class Application implements Callable<Integer> {
 
         System.out.printf("Port: %s, Baud: %s, Type: %s %n", serialPort, serialBaudRate, serialTelegramType);
 
+        // Setup our data subscriber and processor
+        DataSubscriber dataSubscriber = new DataSubscriber();
 
+        // Start reading fomr the serial port
+        serialSensor.start();
+
+        // Subscribe to the data read from the serial port
+        serialSensor.subscribe(dataSubscriber);
+
+        // Sleep some time to get some measurements
+        Thread.sleep(5000);
 
 
         return 0;
