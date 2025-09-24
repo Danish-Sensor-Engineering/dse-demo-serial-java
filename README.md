@@ -1,6 +1,6 @@
 # DSE Serial Reader - Example  
 
-This repository serves as example of how to open a serial port and read measurements from a sensor.
+This repository serves as example of how to read measurements from a RS322 or RS322 connected serial sensor.
 
 The flow would typically be:
 
@@ -15,7 +15,12 @@ The flow would typically be:
 
 Java (21 or later) - [OpenJDK](https://adoptopenjdk.net/), Oracle JDK, or any other Java JDK, is required to build and run.
 
-We use the cross-platform [jSerialComm](https://fazecast.github.io/jSerialComm/) library for serial port communication, which must also be included when using this library.
+Our library [libdse-java](lib/README.md) uses the cross-platform [jSerialComm](https://fazecast.github.io/jSerialComm/) library for serial port communication, which must also be included in your project.
+
+
+## Notes
+
+Our product manuals describes the low-level sensor protocol, making it possible to implement the communication in other programming languages. We are ready to support you within the limits of our knowledge of the programming language you use.
 
 
 ## Development
