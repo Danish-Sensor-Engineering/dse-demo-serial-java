@@ -1,21 +1,26 @@
 # DSE Serial Reader - Example  
 
-This repository serves as example of how to open a serial port and read measurements from a sensor.
+This repository serves as example of how to read measurements from a RS232 or RS422 serial connected DSE sensor.
 
 The flow would typically be:
 
-- Open the serial port with correct baud-rate
-- Set the correct TelegramHandler (eg. 16bit or 18bit)
-- Subscribe to the results (by implementing a [Flow.Subscriber< Measurement >](src/main/java/dse/cli/serial/DataSubscriber.java) class)
+- Open the serial port with correct settings
+- Set the required TelegramHandler (eg. 16bit or 18bit for ODS)
+- Subscribe to the measurement results (by implementing a [Flow.Subscriber< Measurement >](src/main/java/dse/cli/serial/DataSubscriber.java) class)
 - Use the results in your business logic
-- Cancel subscription and exit
+- End subscription and exit program
 
 
 ## Requirements
 
-Java (21 or later) - [OpenJDK](https://adoptopenjdk.net/), Oracle JDK, or any other Java JDK, is required to build and run.
+Java (21) - [OpenJDK](https://adoptopenjdk.net/), Oracle JDK, or any other Java JDK, is required to build and run.
 
-We use the cross-platform [jSerialComm](https://fazecast.github.io/jSerialComm/) library for serial port communication, which must also be included when using this library.
+Our library uses the cross-platform [jSerialComm](https://fazecast.github.io/jSerialComm/) library for serial port communication, which must also be included in your project.
+
+
+## Notes
+
+Our product manuals describes the low-level sensor protocol, making it possible to implement the communication in other programming languages. We are ready to support you within the limits of our knowledge of the programming language you use.  
 
 
 ## Development

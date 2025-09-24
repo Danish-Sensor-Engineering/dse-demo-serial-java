@@ -36,8 +36,8 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:2.0.16'
     implementation 'org.slf4j:slf4j-api:2.0.16'
 
-    implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
-    implementation 'dse.libs:libdse-java:1.0.16'
+    implementation 'dse.libs:libdse-java:1.0.16'            // Handles the low-level telegrams sent by DSE sensors
+    implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)' // Used by libdse-java for cross-platform serial port comm.
 }
 
 jar {
