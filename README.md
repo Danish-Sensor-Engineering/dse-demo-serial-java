@@ -1,11 +1,11 @@
 # DSE Serial Reader - Example  
 
-This repository serves as example of how to read measurements from a RS322 or RS322 connected serial sensor.
+This repository serves as example of how to read measurements from a RS232 or RS422 connected serial sensor.
 
 The flow would typically be:
 
-- Open the serial port with correct baud-rate
-- Set the correct TelegramHandler (eg. 16bit or 18bit)
+- Instantiate a *SerialDistanceSensor* (for ODS) or *SerialProfileSensor* (for O2DS / Z-Line) (with the correct serial port and baud-rate)
+- Set the correct TelegramHandler (eg. 16bit or 18bit), in case of *SerialDistanceSensor*
 - Subscribe to the results (by implementing a [Flow.Subscriber< Measurement >](src/main/java/dse/cli/serial/DataSubscriber.java) class)
 - Use the results in your business logic
 - Cancel subscription and exit
