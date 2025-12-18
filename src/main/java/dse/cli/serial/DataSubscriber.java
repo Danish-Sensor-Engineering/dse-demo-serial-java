@@ -27,7 +27,7 @@ public class DataSubscriber implements Flow.Subscriber<Measurement> {
         } else if(measurement.hasDistance()){
             System.out.printf("distance: %s%n", measurement.distance());
         } else {
-            System.out.printf("profiles: %s%n", measurement.getCoordinates().length);
+            System.out.printf("profiles: %s%n", measurement.coordinates().length);
         }
 
         // Ask for next result

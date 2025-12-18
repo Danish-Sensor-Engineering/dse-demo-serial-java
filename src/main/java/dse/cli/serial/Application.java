@@ -13,7 +13,7 @@ public class Application implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", arity = "0..1", defaultValue = "ttyUSB0")
     String serialPort;
 
-    @CommandLine.Parameters(index = "1", defaultValue = "38400", description = "Valid values: 38400, 115200")
+    @CommandLine.Parameters(index = "1", defaultValue = "38400", description = "Valid values: 38400, 115200, 460800")
     Integer serialBaudRate;
 
     @CommandLine.Parameters(index = "2", defaultValue = "ODS-16bit", description = "Valid values: ODS-16bit, ODS-18bit, O2DS")
