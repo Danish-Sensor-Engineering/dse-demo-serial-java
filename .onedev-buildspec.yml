@@ -1,9 +1,15 @@
-version: 41
+version: 57
+properties:
+- name: image
+  value: gradle:9-jdk21
+  archived: false
 imports:
 - projectPath: common/java/gradle-fatjar
   revision: main
+  accessTokenSecret: common-import
 jobs:
 - name: Push to Github
+  executeInSandbox: false
   steps:
   - type: PushRepository
     name: Github
@@ -16,10 +22,14 @@ jobs:
   triggers:
   - type: BranchUpdateTrigger
     branches: main
+    userMatch: anyone
     projects: dse/dse-demo-serial-java
   jobDependencies:
   - jobName: Test
     requireSuccessful: true
-  maxRetries: 3
+  retryCondition: never
+  maxAttempts: 4
   retryDelay: 30
+  includeUpstreamWhenRebuild: false
+  includeDownstreamWhenRebuild: false
   timeout: 14400
